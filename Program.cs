@@ -2,18 +2,6 @@
 
 namespace PersonalRegister
 {
-    class Employee
-    {
-        public string name;
-        public double salary;
-
-        public Employee(string name, double salary)
-        {
-            this.name = name;
-            this.salary = salary;
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
@@ -37,28 +25,11 @@ namespace PersonalRegister
                 switch (choice)
                 {
                     case 1:
-                        Console.Write("Skriv namn: ");
-                        string name = Console.ReadLine();
-
-                        Console.Write("Skriv lön: ");
-                        double salary = double.Parse(Console.ReadLine());
-
-                        employees.Add(new Employee(name, salary));
+                        AddEmployee(employees);
                         break;
 
                     case 2:
-                        if (employees.Count == 0)
-                        {
-                            Console.WriteLine("Tom");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Personal:");
-                            foreach (Employee emp in employees)
-                            {
-                                Console.WriteLine($"Namn: {emp.name} - Lön: {emp.salary}");
-                            }
-                        }
+                        ViewEmployee(employees);
                         break;
 
                     case 0:
@@ -66,6 +37,33 @@ namespace PersonalRegister
                         break;
                 }
             } while (choice != 0);
+        }
+
+        private static void ViewEmployee(List<Employee> employees)
+        {
+            if (employees.Count == 0)
+            {
+                Console.WriteLine("Tom");
+            }
+            else
+            {
+                Console.WriteLine("Personal:");
+                foreach (Employee emp in employees)
+                {
+                    Console.WriteLine($"Namn: {emp.name} - Lön: {emp.salary}");
+                }
+            }
+        }
+
+        private static void AddEmployee(List<Employee> employees)
+        {
+            Console.Write("Skriv namn: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Skriv lön: ");
+            double salary = double.Parse(Console.ReadLine());
+
+            employees.Add(new Employee(name, salary));
         }
     }
 }
