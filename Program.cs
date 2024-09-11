@@ -48,9 +48,11 @@ namespace PersonalRegister
             else
             {
                 Console.WriteLine("Personal:");
+                int id = 0;
                 foreach (Employee emp in employees)
                 {
-                    Console.WriteLine($"Namn: {emp.name} - Lön: {emp.salary}");
+                    id++;
+                    Console.WriteLine($"ID: {id} - Namn: {emp.name} - Lön: {emp.salary}");
                 }
             }
         }
@@ -61,9 +63,17 @@ namespace PersonalRegister
             string name = Console.ReadLine();
 
             Console.Write("Skriv lön: ");
-            double salary = double.Parse(Console.ReadLine());
+            string salaryInput = Console.ReadLine();
 
-            employees.Add(new Employee(name, salary));
+            if (string.IsNullOrEmpty(name) || !double.TryParse(salaryInput, out double salary) || salary < 0)
+            {
+                Console.WriteLine("* Ogiltig namn eller lön!");
+            }
+            else
+            {
+                employees.Add(new Employee(name, salary));
+            }
+
         }
     }
 }
