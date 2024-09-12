@@ -10,9 +10,11 @@ namespace PersonalRegister
     {
         public string name;
         public double salary;
+        public int ID;
 
-        public Employee(string name, double salary)
+        public Employee(int ID, string name, double salary)
         {
+            this.ID = ID;
             this.name = name;
             this.salary = salary;
         }

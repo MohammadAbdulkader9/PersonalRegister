@@ -35,8 +35,31 @@ namespace PersonalRegister
                     case 0:
                         Console.WriteLine("Avslut");
                         break;
+                                        
                 }
             } while (choice != 0);
+        }
+               
+        private static void AddEmployee(List<Employee> employees)
+        {
+            int id = 0;
+            double salary = 0;
+
+            Console.Write("Skriv namn: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Skriv lön: ");
+            double.TryParse(Console.ReadLine(), out salary);
+
+            if (string.IsNullOrWhiteSpace(name) || salary < 0)
+            {
+                Console.WriteLine("* Ogiltig namn eller lön!");
+            }
+            else
+            {
+                id++;
+                employees.Add(new Employee(id, name, salary));
+            }
         }
 
         private static void ViewEmployee(List<Employee> employees)
@@ -48,32 +71,11 @@ namespace PersonalRegister
             else
             {
                 Console.WriteLine("Personal:");
-                int id = 0;
                 foreach (Employee emp in employees)
                 {
-                    id++;
-                    Console.WriteLine($"ID: {id} - Namn: {emp.name} - Lön: {emp.salary}");
+                    Console.WriteLine($"ID: {emp.ID} - Namn: {emp.name} - Lön: {emp.salary}");
                 }
             }
-        }
-
-        private static void AddEmployee(List<Employee> employees)
-        {
-            Console.Write("Skriv namn: ");
-            string name = Console.ReadLine();
-
-            Console.Write("Skriv lön: ");
-            string salaryInput = Console.ReadLine();
-
-            if (string.IsNullOrEmpty(name) || !double.TryParse(salaryInput, out double salary) || salary < 0)
-            {
-                Console.WriteLine("* Ogiltig namn eller lön!");
-            }
-            else
-            {
-                employees.Add(new Employee(name, salary));
-            }
-
         }
     }
 }
